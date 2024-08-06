@@ -12,50 +12,65 @@ import { useFrame, useThree } from '@react-three/fiber'
 import islandScene from '../assets/3d/island.glb'
 import { a } from '@react-spring/three'
 
-const Island = ({isRotating, setIsRotating, ...props}) => {
+const Island = ({isRotating, setIsRotating, setCurrentStage, ...props}) => {
   const { nodes, materials } = useGLTF(islandScene)
   const islandRef = useRef();
   const {gl, viewport} = useThree()
   const lastX = useRef(0)
   const rotationSpeed = useRef(0)
   const dampingFactor = 0.95
+  const rotationSensitivity = 0.005;
 
+  const startRotation = (clientX) => {
+    setIsRotating(true);
+    lastX.current = clientX;
+  }
+
+  const endRotation = () => {
+    setIsRotating(false);
+  }
+
+  const moveRotation = (clientX) => {
+    if (isRotating) {
+      const delta = (clientX - lastX.current) / viewport.width;
+      islandRef.current.rotation.y += delta * rotationSensitivity * Math.PI;
+      lastX.current = clientX;
+      rotationSpeed.current = delta * rotationSensitivity * Math.PI;
+    }
+  }
+
+  //For pc rotation
   const handlePointerDown = (e) => {
     e.stopPropagation();
     e.preventDefault();
-    setIsRotating(true)
-
-    const clientX = e.touches ? e.touches[0].clientX : e.clientX
-
+    startRotation(e.clientX)
   }
 
   const handlePointerUp = (e) => {
     e.stopPropagation();
     e.preventDefault();
-    setIsRotating(false)
+    endRotation();
   }
 
   const handlePointerMove = (e) => {
     e.stopPropagation();
     e.preventDefault();
-
-    if(isRotating) {
-      const clientX = e.touches ? e.touches[0].clientX : e.clientX
-
-      const delta = (clientX - lastX.current) / viewport.width
-      islandRef.current.rotation.y += delta * 0.01 * Math.PI
-      lastX.current = clientX
-      rotationSpeed.current = delta * 0.01 * Math.PI
-    }
+    moveRotation(e.clientX)
   }
 
   const handleKeyDown = (e) => {
-    if(e.key === 'ArrowLeft') {
-      if(!isRotating) setIsRotating(true)
-      islandRef.current.rotation.y += 0.01 * Math.PI;
-    }else if(e.key === 'ArrowRight') {
-      if(!isRotating) setIsRotating(true)
-      islandRef.current.rotation.y -= 0.01 * Math.PI;
+    if (e.key === "ArrowLeft") {
+      if (!isRotating) setIsRotating(true);
+        if (islandRef.current) {
+            islandRef.current.rotation.y += 0.005 * Math.PI;
+        }
+      rotationSpeed.current = 0.007;
+    } else if (e.key === "ArrowRight") {
+      if (!isRotating) setIsRotating(true);
+        if (islandRef.current) {
+            islandRef.current.rotation.y -= 0.005 * Math.PI;
+        }
+      rotationSpeed.current = -0.007;
     }
   }
 
@@ -64,6 +79,26 @@ const Island = ({isRotating, setIsRotating, ...props}) => {
       setIsRotating(false)
     }
   }
+
+  //For mobile rotation
+  const handleTouchStart = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+    startRotation(e.touches[0].clientX);
+  }
+
+  const handleTouchMove = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+    moveRotation(e.touches[0].clientX);
+  }
+
+  const handleTouchEnd = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+    endRotation();
+  }
+
 
   useFrame(() => {
    if(!isRotating) {
@@ -102,6 +137,9 @@ const Island = ({isRotating, setIsRotating, ...props}) => {
     canvas.addEventListener('pointerdown', handlePointerDown)
     canvas.addEventListener('pointerup', handlePointerUp)
     canvas.addEventListener('pointermove', handlePointerMove)
+    canvas.addEventListener('touchstart', handleTouchStart);
+    canvas.addEventListener('touchmove', handleTouchMove);
+    canvas.addEventListener('touchend', handleTouchEnd);
     document.addEventListener('keydown', handleKeyDown)
     document.addEventListener('keyup', handleKeyUp)
 
@@ -109,11 +147,14 @@ const Island = ({isRotating, setIsRotating, ...props}) => {
       canvas.removeEventListener('pointerdown', handlePointerDown)
       canvas.removeEventListener('pointerup', handlePointerUp)
       canvas.removeEventListener('pointermove', handlePointerMove)
+      canvas.removeEventListener('touchstart', handleTouchStart);
+      canvas.removeEventListener('touchmove', handleTouchMove);
+      canvas.removeEventListener('touchend', handleTouchEnd);
       document.removeEventListener('keydown', handleKeyDown)
       document.removeEventListener('keyup', handleKeyUp)
  
     }
-  }, [gl, handlePointerDown, handlePointerUp, handlePointerMove])
+  }, [gl, handlePointerDown, handlePointerUp, handlePointerMove, handleTouchStart, handleTouchEnd, handleTouchMove, handleKeyDown, handleKeyUp])
 
   return (
     <a.group {...props} ref={islandRef}>
