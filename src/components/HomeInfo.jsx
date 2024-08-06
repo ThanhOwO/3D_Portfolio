@@ -1,6 +1,7 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import {arrow} from '../assets/icons'
+import React, { useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
+import { arrow } from '../assets/icons';
+import { gsap } from 'gsap';
 
 const Infobox = ({text, link, btnText}) => (
     <div className='info-box'>
@@ -44,7 +45,19 @@ const renderContent = {
 }
 
 const HomeInfo = ({currentStage}) => {
-  return renderContent[currentStage] || null
+    const containerRef = useRef(null);
+
+    useEffect(() => {
+      if (containerRef.current) {
+        gsap.fromTo(containerRef.current, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5 });
+      }
+    }, [currentStage]);
+  
+    return (
+      <div ref={containerRef}>
+        {renderContent[currentStage] || null}
+      </div>
+    );
 }
 
 export default HomeInfo
