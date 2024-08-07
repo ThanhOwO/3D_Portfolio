@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { arrow } from '../assets/icons';
 import { gsap } from 'gsap';
+import { useGSAP } from '@gsap/react';
 
 const Infobox = ({text, link, btnText}) => (
     <div className='info-box'>
@@ -47,7 +48,7 @@ const renderContent = {
 const HomeInfo = ({currentStage}) => {
     const containerRef = useRef(null);
 
-    useEffect(() => {
+    useGSAP(() => {
       if (containerRef.current) {
         gsap.fromTo(containerRef.current, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5 });
       }
