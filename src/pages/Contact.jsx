@@ -3,7 +3,7 @@ import emailjs from '@emailjs/browser'
 import { Canvas } from '@react-three/fiber'
 import { Alert, Loader } from '../components'
 import { Fox } from '../models'
-import useAlert from '../../hooks/useAlert'
+import useAlert from '../hooks/useAlert'
 
 const Contact = () => {
 
@@ -90,7 +90,7 @@ const Contact = () => {
           </label>
           <label className='text-black-500 font-semibold'>
             Your message
-            <textarea 
+            <textarea
               name='message'
               rows='4'
               className='textarea'
