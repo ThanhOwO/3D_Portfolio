@@ -3,17 +3,74 @@ import { skills, experiences } from '../constants'
 import { VerticalTimeline, VerticalTimelineElement }  from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
 import { CTA } from '../components';
+import { avatar, hero } from '../assets/images';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
 
 const About = () => {
+
+  useGSAP(() => {
+    
+    gsap.fromTo(
+      '.intro-text',
+      { x: -100, opacity: 0 },
+      { x: 0, opacity: 1, duration: 1, ease: 'power2.inOut'}
+    );
+    gsap.fromTo(
+      '.avatar-container',
+      { opacity: 0, scale: 0 },
+      { opacity: 1, scale: 1, duration: 1, ease: 'power2.out' }
+    );
+    gsap.fromTo(
+      '.subhead-text',
+      { x: 50, opacity: 0 }, 
+      { x: 0, opacity:1, duration: 1, delay: 1, ease: 'power2.inOut' }
+    );
+    gsap.fromTo(
+      '.skill-item',
+      { y: 50, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 1,
+        ease: 'power2.inOut',
+        delay: 1,
+        stagger: 0.1,
+      }
+    );
+
+   
+  },[])
+
   return (
     <section className='max-container'>
-      <h1 className='head-text'>
-        Hello, I'm <span className='blue-gradient_text font-semibold drop-shadow'>Thanh</span>
-      </h1>
 
-      <div className='mt-5 flex flex-col gap-3 text-slate-500'>
-        <p>A graduated student seeking a job opportunity, with a strong background in system design, web, mobile programming and testing.</p>
+      <div className="flex flex-col items-center justify-center sm:flex-row">
+        <div className="flex-1 intro-text">
+          <h1 className="head-text">
+            Hello, I'm{" "}
+            <span className="blue-gradient_text font-semibold drop-shadow">
+              Thanh
+            </span>
+          </h1>
+          <div className="mt-5 text-slate-500">
+            <p>
+              A graduated student seeking a job opportunity, with a strong background
+              in system design, web, mobile programming, and testing.
+            </p>
+          </div>
+        </div>
+        <div className="flex-1 mt-5 sm:mt-0 flex justify-center items-center avatar-container">
+          <div className="w-40 h-40 sm:w-80 sm:h-80 overflow-hidden rounded-full flex justify-center items-center">
+            <img
+              src={avatar}
+              className="w-full h-full object-cover"
+              alt="Avatar"
+            />
+          </div>
+        </div>
       </div>
+
 
       {/* Skills */}
       <div className='py-10 flex flex-col'>
@@ -22,7 +79,7 @@ const About = () => {
         </h3>
         <div className='flex flex-wrap mt-16 gap-12'>
           {skills.map((skill) => (
-            <div className='block-container w-20 h-20'>
+            <div className='block-container w-20 h-20 skill-item'>
               <div className='btn-back rounded-xl'/>
               <div className='btn-front rounded-xl flex justify-center items-center'>
                 <img

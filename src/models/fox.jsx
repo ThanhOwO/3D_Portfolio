@@ -16,6 +16,7 @@ const Fox = ({ currentAnimation, ...props}) => {
   const { actions } = useAnimations(animations, group)
 
   useEffect(() => {
+    console.log(animations)
     Object.values(actions).forEach((actions) => actions.stop())
     if(actions[currentAnimation]){
         actions[currentAnimation].play()

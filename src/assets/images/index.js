@@ -6,6 +6,7 @@ import tesla from './tesla.png'
 import logo from './logo.svg'
 import playground from './playground.png'
 import HC from './HC.png'
+import avatar from './avatar.jpg'
 
 export {
     hero,
@@ -15,5 +16,6 @@ export {
     tesla,
     logo,
     playground,
-    HC
+    HC,
+    avatar
 }
