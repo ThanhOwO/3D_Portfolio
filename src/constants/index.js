@@ -1,4 +1,4 @@
-import { HC, meta, playground, shopify, starbucks, tesla } from "../assets/images";
+import { HC, iphonelogo, logo, memos, meta, playground, shopify, starbucks, tesla, tov } from "../assets/images";
 import {
     car,
     contact,
@@ -17,6 +17,7 @@ import {
     nestjs,
     nextjs,
     nodejs,
+    portfolio,
     pricewise,
     python,
     react,
@@ -26,7 +27,8 @@ import {
     summiz,
     tailwindcss,
     threads,
-    typescript
+    typescript,
+    vite
 } from "../assets/icons";
 
 export const skills = [
@@ -191,32 +193,32 @@ export const socialLinks = [
 
 export const projects = [
     {
-        iconUrl: pricewise,
-        theme: 'btn-back-red',
-        name: 'Amazon Price Tracker',
-        description: 'Developed a web application that tracks and notifies users of price changes for products on Amazon, helping users find the best deals.',
-        link: 'https://github.com/adrianhajdin/pricewise',
-    },
-    {
-        iconUrl: threads,
-        theme: 'btn-back-green',
-        name: 'Full Stack Threads Clone',
-        description: 'Created a full-stack replica of the popular discussion platform "Threads," enabling users to post and engage in threaded conversations.',
-        link: 'https://github.com/adrianhajdin/threads',
-    },
-    {
-        iconUrl: car,
-        theme: 'btn-back-blue',
-        name: 'Car Finding App',
-        description: 'Designed and built a mobile app for finding and comparing cars on the market, streamlining the car-buying process.',
-        link: 'https://github.com/adrianhajdin/project_next13_car_showcase',
-    },
-    {
-        iconUrl: snapgram,
+        iconUrl: iphonelogo,
         theme: 'btn-back-pink',
-        name: 'Full Stack Instagram Clone',
-        description: 'Built a complete clone of Instagram, allowing users to share photos and connect with friends in a familiar social media environment.',
-        link: 'https://github.com/adrianhajdin/social_media_app',
+        name: 'Responsive Iphone-15 Review Website',
+        description: 'This project aims to learn new frameworks like tailwind css, animation gsap and threejs to create a beautiful FE website.',
+        link: 'https://iphone15-pro-review.netlify.app/',
+    },
+    {
+        iconUrl: tov,
+        theme: 'btn-back-red',
+        name: 'Chatbot-Vietnamese Cuisine',
+        description: 'This project aim to create a chatbot web that integrate with Natural Language Processing and Knowledge Graph to help user can find and understand more about Vietnamese cuisine.',
+        link: 'https://github.com/ThanhOwO/Thesis-KG',
+    },
+    {
+        iconUrl: vite,
+        theme: 'btn-back-blue',
+        name: '3D Portfolio',
+        description: 'Built a 3d portfolio with reactjs + vite, threejs and gsap animation.',
+        link: 'https://github.com/ThanhOwO/3D_Portfolio',
+    },
+    {
+        iconUrl: memos,
+        theme: 'btn-back-green',
+        name: 'Android Social Media App',
+        description: 'Android app course project. This project aim to share memories, and establish a personal brand, utilizing the power of social media as a platform for self-expression and reaching a wider audience.',
+        link: 'https://github.com/ThanhOwO/MemoS',
     },
     // {
     //     iconUrl: estate,

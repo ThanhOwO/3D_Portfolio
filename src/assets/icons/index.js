@@ -29,6 +29,8 @@ import soundoff from './soundoff.png'
 import nestjs from './nestjs.svg'
 import mysql from './mysql.svg'
 import python from './python.svg'
+import portfolio from './portfolio.svg'
+import vite from './vitejs.svg'
 
 export {
     css,
@@ -61,5 +63,7 @@ export {
     soundoff,
     nestjs,
     mysql,
-    python
+    python,
+    portfolio,
+    vite
 }
