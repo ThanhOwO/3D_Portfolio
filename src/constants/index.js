@@ -135,7 +135,7 @@ export const experiences = [
         ],
     },
     {
-        title: "QR code System Admin",
+        title: "System Admin",
         company_name: "Hung Cuong Distribution and Service Co.,ltd",
         icon: HC,
         iconBg: "#fbc3bc",
